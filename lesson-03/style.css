@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+}
+.add-03 {
+  width: 920px;
+  margin: 0 auto;
+  border: 1px solid #dddddd;
+  padding: 15px;
+}
+.add-03__header {
+  text-align: center;
+}
+.add-03__params {
+  display: flex;
+
+  justify-content: space-between;
+}
+.add-03__lang {
+  margin-right: 16px;
+}
+.add-03__lang,
+.add-03__algorithm {
+  width: calc(50% - 8px);
+
+  border: 1px solid #dddddd;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+.add-03__result {
+  width: 100%;
+  border: 1px solid #dddddd;
+  padding: 15px;
+}
