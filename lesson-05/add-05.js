@@ -22,7 +22,9 @@ for (let i = 3; i <= 100; i++) {
       isPrime = false;
     }
   });
-  if (isPrime) primeCollection[primeCollection.length] = i;
+  if (isPrime) {
+    primeCollection[primeCollection.length] = i;
+  }
 }
 primeCollection = [1, ...primeCollection];
 primeCollection.forEach((prime) => {
