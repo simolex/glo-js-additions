@@ -192,8 +192,8 @@ class Game {
       console.log("Хочу результат!!!");
 
       game.switchElements.forEach((sw) => {
-        const lamp = sw.lightBulb;
-        if (lamp.lightId !== "light-" + lamp.userNumberSwitch) {
+        console.log(sw.switchtId, sw.lightBulb.userNumberSwitch);
+        if (sw.switchId !== "switch-" + sw.lightBulb.userNumberSwitch) {
           resultGame = false;
         }
       });
@@ -228,7 +228,6 @@ class Game {
 
     this.switchIDs.forEach((id, index) => {
       const newLightBubl = this.getLightByRandom(lightKeys);
-      newLightBubl.setHighlight(index + 1);
 
       this.switchElements[index] = new Switch(id, newLightBubl);
       console.log(this.switchElements[index]);
@@ -245,6 +244,7 @@ class Game {
     lightKeys.splice(randIndex, 1);
 
     this.bulbElements[lightIndex] = new LightBulb(this.ligthBulbIDs[lightIndex]);
+    this.bulbElements[lightIndex].setHighlight(lightIndex + 1);
     return this.bulbElements[lightIndex];
   }
   getLightBulb(num) {
