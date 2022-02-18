@@ -1,15 +1,12 @@
 "use strict";
 
 const commentLine = document.getElementById("comment");
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+let game;
 
 class Switch {
-  constructor(switchId) {
+  constructor(switchId, lightBulb) {
+    this.lightBulb = lightBulb;
     this.switchId = switchId;
-    this.isHot = false;
     this.isPowerOn = false;
     this.switchButton = document.getElementById(switchId);
     this.switchState = this.switchButton.querySelector(".main__state");
@@ -20,40 +17,51 @@ class Switch {
   toggleSwitcher() {
     this.switchState.classList.toggle("main__state--power-on");
     this.isPowerOn = !this.isPowerOn;
-    if (this.isPowerOn) this.isHot = true;
+
+    this.lightBulb.setState(this.isPowerOn);
+
+    //////// test
+    this.lightBulb.showState();
   }
 }
 
-const switchFirst = new Switch("switch-1");
-const switchSecond = new Switch("switch-2");
-const switchThree = new Switch("switch-3");
-
 class SelectorBulb {
-  constructor(selectorId) {
-    this.lightBulb = 1;
+  constructor(selectorId, switchID, pos) {
+    this.switchID = switchID;
+    this.lightBulb = pos + 1;
     this.selector = document.getElementById(selectorId);
-    this.selector.value = 1;
+    this.selector.value = this.lightBulb;
     this.selector.addEventListener("input", (e) => {
+      this.setState(e.target.value);
+    });
+    this.selector.addEventListener("click", (e) => {
       this.setState(e.target.value);
     });
   }
   setState(value) {
     this.lightBulb = +value;
+    game.getLightBulb(this.lightBulb).setHighlight(this.switchID);
   }
 }
 
-const selectorFirst = new SelectorBulb("range-1");
-
-console.log(switchFirst, selectorFirst);
-
 class LightBulb {
-  isOn;
   constructor(lightId) {
+    this.isHot = false;
+    this.isOn = false;
     this.lightId = lightId;
     this.lightBulb = document.getElementById(lightId);
+    this.listColor = [
+      "main__switcher--color-1",
+      "main__switcher--color-2",
+      "main__switcher--color-3",
+    ];
+    this.userNumberSwitch;
   }
   setState(isOn) {
     this.isOn = isOn;
+    if (this.isOn) {
+      this.isHot = true;
+    }
   }
   showState() {
     const img = this.lightBulb.querySelector("img");
@@ -63,11 +71,17 @@ class LightBulb {
       img.src = "img/lightbulb-off.svg";
     }
   }
+  setHighlight(numSwitch) {
+    const highLighter = this.lightBulb.querySelector(".main__switcher");
+
+    this.userNumberSwitch = numSwitch;
+    this.listColor.forEach((color) => {
+      highLighter.classList.remove(color);
+      highLighter.classList.add("main__switcher--color-" + numSwitch);
+    });
+    //
+  }
 }
-
-const lightFirst = new LightBulb("light-1");
-
-console.log(lightFirst);
 
 class Button {
   constructor(buttonId, stage) {
@@ -88,43 +102,10 @@ class Button {
   }
 
   action() {
-    setLevel(this.nextStage);
+    game.setLevel(this.nextStage);
     console.log("Click: " + this.buttonId);
   }
 }
-
-const buttonFirst = new Button("button-start");
-
-console.log(buttonFirst);
-
-const levels = {
-  0: {
-    blocks: {
-      switchs: false,
-      selectors: false,
-      lights: false,
-    },
-    comment: "Для начала игры нажмите старт",
-  },
-  start: {
-    blocks: {
-      switchs: true,
-      selectors: false,
-      lights: false,
-    },
-    comment:
-      "Установите выключатели так, чтобы угадаить к каким лампам они подключены в соседеней комнате",
-  },
-  next: {
-    blocks: {
-      switchs: true,
-      selectors: true,
-      lights: true,
-    },
-    comment:
-      "Угадайте какой выключатель, какой лампе соответствует? С помощью слайдеров(ползунков) покажите ваше решение",
-  },
-};
 
 class Room {
   constructor(roomId) {
@@ -141,46 +122,131 @@ class Room {
   }
 }
 
-const rooms = {
-  switchs: new Room("switchs"),
-  selectors: new Room("selectors"),
-  lights: new Room("lights"),
-};
-
-const buttons = {
-  0: new Button("button-start", "start"),
-  start: new Button("button-next", "next"),
-  next: new Button("button-ready", "0"),
-};
-
-class Game {}
-
-let levelGlobal = "0";
-const wait = (waitLevel) => {
-  do {
-    sleep(1000);
-    console.log(`Ждем: ${waitLevel}`);
-  } while (levelGlobal != waitLevel);
-};
-
-function setLevel(levelState) {
-  console.log(levelState);
-  const level = levels[levelState];
-  for (let btn in buttons) {
-    if (btn === levelState) {
-      buttons[btn].show();
-    } else {
-      buttons[btn].hide();
-    }
+class Game {
+  constructor() {
+    this.levels = {
+      0: {
+        blocks: {
+          switchs: false,
+          selectors: false,
+          lights: false,
+        },
+        comment: "Для начала игры нажмите старт",
+      },
+      start: {
+        blocks: {
+          switchs: true,
+          selectors: false,
+          lights: false,
+        },
+        comment:
+          "Установите выключатели так, чтобы угадаить к каким лампам они подключены в соседеней комнате",
+      },
+      next: {
+        blocks: {
+          switchs: true,
+          selectors: true,
+          lights: true,
+        },
+        comment:
+          "Угадайте какой выключатель, какой лампе соответствует? С помощью слайдеров(ползунков) покажите ваше решение",
+      },
+      result: {
+        blocks: {
+          switchs: true,
+          selectors: true,
+          lights: true,
+        },
+        comment: "",
+      },
+    };
+    this.rooms = {
+      switchs: new Room("switchs"),
+      selectors: new Room("selectors"),
+      lights: new Room("lights"),
+    };
+    this.buttons = {
+      0: new Button("button-start", "start"),
+      start: new Button("button-next", "next"),
+      next: new Button("button-ready", "result"),
+    };
+    this.ligthBulbIDs = ["light-1", "light-2", "light-3"];
+    this.switchIDs = ["switch-1", "switch-2", "switch-3"];
+    this.selectorIDs = ["range-1", "range-2", "range-3"];
+    this.bulbElements = [];
+    this.switchElements = [];
+    this.selectorElements = [];
+    this.init();
   }
-  for (let block in level.blocks) {
-    if (level.blocks[block]) {
-      rooms[block].show();
-    } else {
-      rooms[block].hide();
+  setLevel(levelState) {
+    const level = this.levels[levelState];
+    console.log(level);
+    let resultGame = true;
+
+    if (levelState === "result") {
+      console.log("Хочу результат!!!");
+
+      game.switchElements.forEach((sw) => {
+        const lamp = sw.lightBulb;
+        if (lamp.lightId !== "light-" + lamp.userNumberSwitch) {
+          resultGame = false;
+        }
+      });
+      commentLine.textContent = resultGame ? "Поздравляю, вы выиграли" : "К сожалению вы проиграли";
+      return true;
     }
+    for (let btn in this.buttons) {
+      if (btn === levelState) {
+        this.buttons[btn].show();
+      } else {
+        this.buttons[btn].hide();
+      }
+    }
+    for (let block in level.blocks) {
+      if (level.blocks[block]) {
+        this.rooms[block].show();
+      } else {
+        this.rooms[block].hide();
+      }
+    }
+    if (levelState === "next") {
+      this.bulbElements.forEach((lightBulb) => lightBulb.showState());
+    }
+    commentLine.textContent = level.comment;
   }
-  commentLine.textContent = level.comment;
+
+  init() {
+    const lightKeys = [];
+    this.ligthBulbIDs.forEach((id, index) => {
+      lightKeys.push(index);
+    });
+    console.log(lightKeys);
+
+    this.switchIDs.forEach((id, index) => {
+      const newLightBubl = this.getLightByRandom(lightKeys);
+      newLightBubl.setHighlight(index + 1);
+
+      this.switchElements[index] = new Switch(id, newLightBubl);
+      console.log(this.switchElements[index]);
+    });
+
+    this.selectorIDs.forEach((id, index) => {
+      this.selectorElements[index] = new SelectorBulb(id, index + 1, index);
+    });
+  }
+
+  getLightByRandom(lightKeys) {
+    const randIndex = Math.floor(Math.random() * lightKeys.length);
+    const lightIndex = lightKeys[randIndex];
+    lightKeys.splice(randIndex, 1);
+
+    this.bulbElements[lightIndex] = new LightBulb(this.ligthBulbIDs[lightIndex]);
+    return this.bulbElements[lightIndex];
+  }
+  getLightBulb(num) {
+    return this.bulbElements[num - 1];
+  }
 }
+game = new Game();
 
-setLevel("0");
+game.setLevel("0");
