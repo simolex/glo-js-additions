@@ -9,7 +9,7 @@
 }
 
 :root {
-  --switcher-size: 3rem;
+  --switcher-size: 2rem;
 }
 
 img {
@@ -163,6 +163,10 @@ img {
   padding: 1rem;
   border: 1px solid #dddddd;
   border-radius: 8px;
+}
+.main__control-text {
+  margin: 0;
+  font-size: 75%;
 }
 .main__button {
   padding: 1rem;
