@@ -65,10 +65,17 @@ class LightBulb {
   }
   showState() {
     const img = this.lightBulb.querySelector("img");
+    const tooltip = this.lightBulb.querySelector(".tooltiptext");
     if (this.isOn) {
       img.src = "img/lightbulb-on.svg";
+      tooltip.textContent = "Лампочка светит и горячая";
     } else {
       img.src = "img/lightbulb-off.svg";
+      if (this.isHot) {
+        tooltip.textContent = "Лампочка несветит и теплая";
+      } else {
+        tooltip.textContent = "Лампочка несветит и холодная";
+      }
     }
   }
   setHighlight(numSwitch) {
@@ -103,7 +110,6 @@ class Button {
 
   action() {
     game.setLevel(this.nextStage);
-    console.log("Click: " + this.buttonId);
   }
 }
 
@@ -180,7 +186,6 @@ class Game {
   }
   setLevel(levelState) {
     const level = this.levels[levelState];
-    console.log(level);
     let resultGame = true;
 
     if (levelState === "result") {
@@ -220,7 +225,6 @@ class Game {
     this.ligthBulbIDs.forEach((id, index) => {
       lightKeys.push(index);
     });
-    console.log(lightKeys);
 
     this.switchIDs.forEach((id, index) => {
       const newLightBubl = this.getLightByRandom(lightKeys);
