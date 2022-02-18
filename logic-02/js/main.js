@@ -10,18 +10,24 @@ class Switch {
     this.isPowerOn = false;
     this.switchButton = document.getElementById(switchId);
     this.switchState = this.switchButton.querySelector(".main__state");
-    this.switchButton.addEventListener("click", (e) => {
+    this.switchButton.addEventListener("click", () => {
       this.toggleSwitcher();
     });
+    this.disable = false;
   }
   toggleSwitcher() {
-    this.switchState.classList.toggle("main__state--power-on");
-    this.isPowerOn = !this.isPowerOn;
+    if (!this.disable) {
+      this.switchState.classList.toggle("main__state--power-on");
+      this.isPowerOn = !this.isPowerOn;
 
-    this.lightBulb.setState(this.isPowerOn);
-
+      this.lightBulb.setState(this.isPowerOn);
+    }
     //////// test
-    this.lightBulb.showState();
+    //this.lightBulb.showState();
+  }
+
+  setDisable() {
+    this.disable = true;
   }
 }
 
@@ -216,6 +222,9 @@ class Game {
     }
     if (levelState === "next") {
       this.bulbElements.forEach((lightBulb) => lightBulb.showState());
+      this.switchElements.forEach((sw) => {
+        sw.setDisable();
+      });
     }
     commentLine.textContent = level.comment;
   }
