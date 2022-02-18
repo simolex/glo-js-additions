@@ -196,7 +196,7 @@ class Game {
           resultGame = false;
         }
       });
-      commentLine.textContent = resultGame ? "Поздравляю, вы выиграли" : "К сожалению вы проиграли";
+      commentLine.textContent = resultGame ? "Поздравляю, вы выиграли!!! Ура-а-а!!!" : "К сожалению вы проиграли. 😐";
       return true;
     }
     for (let btn in this.buttons) {
