@@ -20,6 +20,9 @@ img {
   width: 74rem;
   margin: 0 auto;
 }
+.header {
+  color: darkblue;
+}
 
 .main__highlight {
   width: calc(var(--switcher-size) * 2 + 2rem);
@@ -167,6 +170,27 @@ img {
 .main__control-text {
   margin: 0;
   font-size: 75%;
+  color: darkblue;
+}
+.light-bulb {
+  position: relative;
+}
+.main__light-number {
+  position: absolute;
+  top: 0;
+  right: 0;
+  max-width: var(--switcher-size);
+  max-height: var(--switcher-size);
+  width: 100%;
+  height: 100%;
+  border: 2px solid #dddddd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777777;
+  background-color: #eeeeee;
+  font-weight: 700;
 }
 .main__button {
   padding: 1rem;
