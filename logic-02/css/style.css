@@ -172,10 +172,14 @@ img {
   font-size: 75%;
   color: darkblue;
 }
+.switcher {
+  position: relative;
+}
+
 .light-bulb {
   position: relative;
 }
-.main__light-number {
+.main__marker-number {
   position: absolute;
   top: 0;
   right: 0;
@@ -188,10 +192,11 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #777777;
+  color: darkblue;
   background-color: #eeeeee;
   font-weight: 700;
 }
+
 .main__button {
   padding: 1rem;
   min-width: 10rem;
@@ -204,14 +209,14 @@ img {
 .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
+  border-bottom: 1px dotted #eeeeee;
 }
 
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 120px;
-  background-color: black;
-  color: #fff;
+  background-color: #eeeeee;
+  color: darkblue;
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
