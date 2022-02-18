@@ -28,7 +28,7 @@ img {
   border-radius: 50%;
 }
 .main__highlight--active {
-  background-color: #cccccc;
+  background-color: #eeeeee;
 }
 .main__switcher {
   cursor: pointer;

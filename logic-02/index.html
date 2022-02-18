@@ -15,10 +15,9 @@
         <h1 class="header__title">Логическая задача</h1>
         <h2 class="header__subtitle">Про три лампы и три выключателя</h2>
         <p class="header__description">
-          Имеется две разделенные наглухо комнаты. В первой комнате стоят три пронумерованных
-          выключателя. Провода от этих выключателей ведут в соседнюю комнату, в которой стоят три
-          пронумерованные лампы накаливания. Как узнать, какой выключатель относится к какой лампе,
-          если в каждую комнату можно зайти только один раз?
+          Имеется две разделенные наглухо комнаты. В первой комнате стоят три пронумерованных выключателя. Провода от
+          этих выключателей ведут в соседнюю комнату, в которой стоят три пронумерованные лампы накаливания. Как узнать,
+          какой выключатель относится к какой лампе, если в каждую комнату можно зайти только один раз?
         </p>
       </div>
     </header>
@@ -26,7 +25,7 @@
       <div class="container">
         <div class="main__build">
           <div class="main__room switcher-room" id="switchs">
-            <div class="main__highlight" id="switch-1">
+            <div class="main__highlight main__highlight--active" id="switch-1">
               <div class="main__switcher main__switcher--color-1">
                 <div class="main__case">
                   <div class="main__state">
@@ -35,7 +34,7 @@
                 </div>
               </div>
             </div>
-            <div class="main__highlight" id="switch-2">
+            <div class="main__highlight main__highlight--active" id="switch-2">
               <div class="main__switcher main__switcher--color-2">
                 <div class="main__case">
                   <div class="main__state">
@@ -44,7 +43,7 @@
                 </div>
               </div>
             </div>
-            <div class="main__highlight" id="switch-3">
+            <div class="main__highlight main__highlight--active" id="switch-3">
               <div class="main__switcher main__switcher--color-3">
                 <div class="main__case">
                   <div class="main__state">
@@ -57,69 +56,43 @@
           <div class="main__control" id="selectors">
             <div class="main__select-bulb">
               <div class="main__switcher main__switcher--color-1">
-                <input
-                  class="main__range"
-                  type="range"
-                  list="tickmarks"
-                  min="1"
-                  max="3"
-                  step="1"
-                  id="range-1"
-                />
+                <input class="main__range" type="range" list="tickmarks" min="1" max="3" step="1" id="range-1" />
               </div>
               <p class="main__control-text" id="range-text-1">куда подключен выключатель</p>
             </div>
             <div class="main__select-bulb">
               <div class="main__switcher main__switcher--color-2">
-                <input
-                  class="main__range"
-                  type="range"
-                  list="tickmarks"
-                  min="1"
-                  max="3"
-                  step="1"
-                  id="range-2"
-                />
+                <input class="main__range" type="range" list="tickmarks" min="1" max="3" step="1" id="range-2" />
               </div>
               <p class="main__control-text" id="range-text-2">куда подключен выключатель</p>
             </div>
             <div class="main__select-bulb">
               <div class="main__switcher main__switcher--color-3">
-                <input
-                  class="main__range"
-                  type="range"
-                  list="tickmarks"
-                  min="1"
-                  max="3"
-                  step="1"
-                  id="range-3"
-                />
+                <input class="main__range" type="range" list="tickmarks" min="1" max="3" step="1" id="range-3" />
               </div>
               <p class="main__control-text" id="range-text-3">куда подключен выключатель</p>
             </div>
           </div>
           <div class="main__info" id="info">
             <button class="main__button" id="button-start">Старт</button>
-            <button class="main__button" id="button-next" style="display: none">
-              К лампам &gt;
-            </button>
+            <button class="main__button" id="button-next" style="display: none">К лампам &gt;</button>
             <button class="main__button" id="button-ready" style="display: none">Готов</button>
             <p class="main__comment" id="comment">eeeee</p>
           </div>
           <div class="main__room lightbulb-room" id="lights">
-            <div class="main__highlight tooltip" id="light-1">
+            <div class="main__highlight main__highlight--active tooltip" id="light-1">
               <div class="main__switcher">
                 <img src="img/lightbulb-on.svg" alt="" />
               </div>
               <span class="tooltiptext"></span>
             </div>
-            <div class="main__highlight tooltip" id="light-2">
+            <div class="main__highlight main__highlight--active tooltip" id="light-2">
               <div class="main__switcher main__switcher--color-2">
                 <img src="img/lightbulb-off.svg" alt="" />
               </div>
               <span class="tooltiptext"></span>
             </div>
-            <div class="main__highlight tooltip" id="light-3">
+            <div class="main__highlight main__highlight--active tooltip" id="light-3">
               <div class="main__switcher main__switcher--color-3">
                 <img src="img/lightbulb-off.svg" alt="" />
               </div>
