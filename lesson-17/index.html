@@ -5,9 +5,89 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Учет технических средств</title>
-    <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/style.css" />
     <script defer src="js/main.js"></script>
   </head>
-  <body></body>
+  <body>
+    <header class="header">
+      <div class="container">
+        <h1 class="header__title">Инвентарный учет технических средств</h1>
+      </div>
+    </header>
+    <div class="main">
+      <div class="container">
+        <form class="main__form" action="#">
+          <div class="main__form-base">
+            <div class="main__control">
+              <label for="unit-name" class="main__label">Наименование</label>
+              <input type="text" class="main__input" id="unit-name" />
+            </div>
+            <div class="main__control">
+              <label for="unit-brand" class="main__label">Бренд</label>
+              <input type="text" class="main__input" id="unit-brand" />
+            </div>
+            <div class="main__control">
+              <label for="unit-model" class="main__label">Модель</label>
+              <input type="text" class="main__input" id="unit-model" />
+            </div>
+            <div class="main__control">
+              <label for="unit-number" class="main__label">Учетный номер</label>
+              <input type="text" class="main__input" id="unit-number" />
+            </div>
+            <div class="main__control">
+              <label for="unit-date" class="main__label">Дата учета</label>
+              <input type="date" class="main__input" id="unit-date" />
+            </div>
+            <div class="main__control">
+              <label for="unit-type" class="main__label">Тип техники</label>
+
+              <select name="unit-type" id="unit-type" class="main__input">
+                <option value="" selected>(выберите тип)</option>
+                <option value="type-computer">Системный блок</option>
+                <option value="type-printer">Принтер</option>
+                <option value="type-monitor">Монитор</option>
+                <option value="type-scanner">Сканер</option>
+              </select>
+            </div>
+          </div>
+          <div class="main__form-second">
+            <div class="main__control">
+              <label for="unit-name" class="main__label">Наименование</label>
+              <input type="text" class="main__input" id="pc-memory" />
+            </div>
+            <div class="main__control">
+              <label for="unit-brand" class="main__label">Бренд</label>
+              <input type="text" class="main__input" id="pc-cpu" />
+            </div>
+            <div class="main__control">
+              <label for="unit-model" class="main__label">Модель</label>
+              <input type="text" class="main__input" id="pc-hdd" />
+            </div>
+          </div>
+        </form>
+        <div class="main__table-wrap">
+          <div class="table main__table">
+            <div class="table__header">
+              <div class="table__title">1</div>
+              <div class="table__title">1</div>
+              <div class="table__title">1</div>
+              <div class="table__title">1</div>
+              <div class="table__title">1</div>
+              <div class="table__title">1</div>
+              <div class="table__title">1</div>
+            </div>
+            <div class="table__row">
+              <div class="table__cell">2</div>
+              <div class="table__cell">2</div>
+              <div class="table__cell">2</div>
+              <div class="table__cell">2</div>
+              <div class="table__cell">2</div>
+              <div class="table__cell">2</div>
+              <div class="table__cell">2</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
