@@ -10,18 +10,24 @@ class Switch {
     this.isPowerOn = false;
     this.switchButton = document.getElementById(switchId);
     this.switchState = this.switchButton.querySelector(".main__state");
-    this.switchButton.addEventListener("click", (e) => {
+    this.switchButton.addEventListener("click", () => {
       this.toggleSwitcher();
     });
+    this.disable = false;
   }
   toggleSwitcher() {
-    this.switchState.classList.toggle("main__state--power-on");
-    this.isPowerOn = !this.isPowerOn;
+    if (!this.disable) {
+      this.switchState.classList.toggle("main__state--power-on");
+      this.isPowerOn = !this.isPowerOn;
 
-    this.lightBulb.setState(this.isPowerOn);
-
+      this.lightBulb.setState(this.isPowerOn);
+    }
     //////// test
-    this.lightBulb.showState();
+    //this.lightBulb.showState();
+  }
+
+  setDisable() {
+    this.disable = true;
   }
 }
 
@@ -30,7 +36,9 @@ class SelectorBulb {
     this.switchID = switchID;
     this.lightBulb = pos + 1;
     this.selector = document.getElementById(selectorId);
-    this.description = this.selector.closest(".main__select-bulb").querySelector(".main__control-text");
+    this.description = this.selector
+      .closest(".main__select-bulb")
+      .querySelector(".main__control-text");
     this.selector.value = this.lightBulb;
     this.selector.addEventListener("input", (e) => {
       this.setState(e.target.value);
@@ -42,9 +50,11 @@ class SelectorBulb {
   setState(value) {
     this.lightBulb = +value;
     game.getLightBulb(this.lightBulb).setHighlight(this.switchID);
-    this.description.textContent = `Выключатель №${(this.switchID + "").replace("switch-", "")} включает лампу №${
-      this.lightBulb
-    }`;
+
+    this.description.textContent = `Выключатель №${(this.switchID + "").replace(
+      "switch-",
+      ""
+    )} включает лампу №${this.lightBulb}`;
   }
 }
 
@@ -54,7 +64,11 @@ class LightBulb {
     this.isOn = false;
     this.lightId = lightId;
     this.lightBulb = document.getElementById(lightId);
-    this.listColor = ["main__switcher--color-1", "main__switcher--color-2", "main__switcher--color-3"];
+    this.listColor = [
+      "main__switcher--color-1",
+      "main__switcher--color-2",
+      "main__switcher--color-3",
+    ];
     this.userNumberSwitch;
   }
   setState(isOn) {
@@ -145,7 +159,8 @@ class Game {
           selectors: false,
           lights: false,
         },
-        comment: "Установите выключатели так, чтобы угадаить к каким лампам они подключены в соседеней комнате",
+        comment:
+          "Установите выключатели так, чтобы угадаить к каким лампам они подключены в соседеней комнате",
       },
       next: {
         blocks: {
@@ -196,7 +211,9 @@ class Game {
           resultGame = false;
         }
       });
-      commentLine.textContent = resultGame ? "Поздравляю, вы выиграли!!! Ура-а-а!!!" : "К сожалению вы проиграли. 😐";
+      commentLine.textContent = resultGame
+        ? "Поздравляю, вы выиграли!!! Ура-а-а!!!"
+        : "К сожалению вы проиграли. 😐";
       return true;
     }
     for (let btn in this.buttons) {
@@ -216,6 +233,9 @@ class Game {
     if (levelState === "next") {
       this.bulbElements.forEach((lightBulb) => lightBulb.showState());
       this.selectorElements.forEach((selector, index) => selector.setState(index + 1));
+      this.switchElements.forEach((sw) => {
+        sw.setDisable();
+      });
     }
     commentLine.textContent = level.comment;
   }
