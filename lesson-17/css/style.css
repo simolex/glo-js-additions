@@ -418,25 +418,12 @@ template {
 }
 
 .table {
-  display: table;
   min-width: 100%;
-}
-
-.table__header {
-  display: table-caption;
-  min-width: 100%;
-}
-
-.table__row {
-  display: row;
-  min-width: 100%;
+  border: 0;
 }
 
 .table__title, .table__cell {
-  display: table-cell;
-  border: 1px solid lime;
   background-color: magenta;
-  width: calc(100% / 7 - 10px);
   padding: 10px 0;
 }
 /*# sourceMappingURL=style.css.map */
