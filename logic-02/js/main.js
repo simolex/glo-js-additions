@@ -36,6 +36,9 @@ class SelectorBulb {
     this.switchID = switchID;
     this.lightBulb = pos + 1;
     this.selector = document.getElementById(selectorId);
+    this.description = this.selector
+      .closest(".main__select-bulb")
+      .querySelector(".main__control-text");
     this.selector.value = this.lightBulb;
     this.selector.addEventListener("input", (e) => {
       this.setState(e.target.value);
@@ -47,6 +50,10 @@ class SelectorBulb {
   setState(value) {
     this.lightBulb = +value;
     game.getLightBulb(this.lightBulb).setHighlight(this.switchID);
+    this.description.textContent = `Выключатель №${(this.switchID + "").replace(
+      "switch-",
+      ""
+    )} включает лампу №${this.lightBulb}`;
   }
 }
 
@@ -203,7 +210,9 @@ class Game {
           resultGame = false;
         }
       });
-      commentLine.textContent = resultGame ? "Поздравляю, вы выиграли" : "К сожалению вы проиграли";
+      commentLine.textContent = resultGame
+        ? "Поздравляю, вы выиграли!!! Ура-а-а!!!"
+        : "К сожалению вы проиграли. 😐";
       return true;
     }
     for (let btn in this.buttons) {
@@ -222,6 +231,7 @@ class Game {
     }
     if (levelState === "next") {
       this.bulbElements.forEach((lightBulb) => lightBulb.showState());
+      this.selectorElements.forEach((selector, index) => selector.setState(index + 1));
       this.switchElements.forEach((sw) => {
         sw.setDisable();
       });

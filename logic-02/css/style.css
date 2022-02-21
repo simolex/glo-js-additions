@@ -9,7 +9,7 @@
 }
 
 :root {
-  --switcher-size: 3rem;
+  --switcher-size: 2rem;
 }
 
 img {
@@ -20,6 +20,9 @@ img {
   width: 74rem;
   margin: 0 auto;
 }
+.header {
+  color: darkblue;
+}
 
 .main__highlight {
   width: calc(var(--switcher-size) * 2 + 2rem);
@@ -28,7 +31,7 @@ img {
   border-radius: 50%;
 }
 .main__highlight--active {
-  background-color: #cccccc;
+  background-color: #eeeeee;
 }
 .main__switcher {
   cursor: pointer;
@@ -164,6 +167,36 @@ img {
   border: 1px solid #dddddd;
   border-radius: 8px;
 }
+.main__control-text {
+  margin: 0;
+  font-size: 75%;
+  color: darkblue;
+}
+.switcher {
+  position: relative;
+}
+
+.light-bulb {
+  position: relative;
+}
+.main__marker-number {
+  position: absolute;
+  top: 0;
+  right: 0;
+  max-width: var(--switcher-size);
+  max-height: var(--switcher-size);
+  width: 100%;
+  height: 100%;
+  border: 2px solid #dddddd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: darkblue;
+  background-color: #eeeeee;
+  font-weight: 700;
+}
+
 .main__button {
   padding: 1rem;
   min-width: 10rem;
@@ -176,14 +209,14 @@ img {
 .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
+  border-bottom: 1px dotted #eeeeee;
 }
 
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 120px;
-  background-color: black;
-  color: #fff;
+  background-color: #eeeeee;
+  color: darkblue;
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
