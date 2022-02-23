@@ -22,8 +22,8 @@
      inkscape:pagecheckerboard="0"
      showgrid="false"
      inkscape:zoom="0.99166667"
-     inkscape:cx="77.647059"
-     inkscape:cy="241.51261"
+     inkscape:cx="52.436975"
+     inkscape:cy="241.5126"
      inkscape:window-width="1366"
      inkscape:window-height="706"
      inkscape:window-x="-8"
@@ -132,4 +132,12 @@
      stroke-linecap="round"
      stroke-linejoin="round"
      id="path7137" />
+  <use
+     xlink:href="#cloud-2"
+     id="use1330"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     transform="matrix(5.0697007,0,0,5.6945556,-3563.9236,-486.11723)" />
 </svg>
