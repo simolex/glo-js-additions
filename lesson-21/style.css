@@ -1,0 +1,57 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img {
+    max-width: 100%;
+}
+
+.container {
+    width: 100%;
+    max-width: 97%;
+}
+
+.title {
+    text-align: center;
+}
+
+.title a {
+    text-decoration: none;
+    color: black;
+    transition: .3s;
+}
+
+.title a:hover {
+    color: red;
+}
+
+.text {
+    text-align: center;
+    font-size: 30px;
+}
+
+.form-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    padding: 5px 10px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px;
+    background-color: azure;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+}
