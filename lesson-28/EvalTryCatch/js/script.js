@@ -62,8 +62,10 @@ const filterByType = (type, ...values) => values.filter((value) => typeof value 
   tryFilterByType = (type, values) => {
     //начала блока попытки
     try {
-      // получения резльтата фильтрации массива values по типу type
-      // и объединение результатов в строку, через разделитель заяпятая + пробел
+      // Передача в filterByType() всех значенией разделенных запятыми,
+      // как параметры  функции.
+      // Получения резльтата фильтрации массива values по типу type
+      // и объединение результатов в строку, через разделитель запятая + пробел
       const valuesArray = eval(`filterByType('${type}', ${values})`).join(", ");
       // формирование текта сообщения с результатом фильтрации
       // по критерию длина результирующей строки
@@ -84,15 +86,25 @@ const filterByType = (type, ...values) => values.filter((value) => typeof value 
 const filterButton = document.querySelector("#filter-btn");
 //На кнопку фильтрации привязвываем событие Click
 filterButton.addEventListener("click", (e) => {
+  //Ищем в DOM элемент по селектору #type и объявляем кнопку фильтрации
   const typeInput = document.querySelector("#type");
+  //Ищем в DOM элемент по селектору #data и объявляем кнопку фильтрации
   const dataInput = document.querySelector("#data");
-
+  // Если поле Данные  пустое,
   if (dataInput.value === "") {
+    //то вывести подсказку через метод setCustomValidity()
     dataInput.setCustomValidity("Поле не должно быть пустым!");
+    //и сообщить об отсутствии результата
     showNoResults();
+    //Иначе (поле Данные не пустое), то:
   } else {
+    //Очистить подсказку Валидации формы
     dataInput.setCustomValidity("");
+    //остановить стандартное поведение формы при событии Submit
     e.preventDefault();
+    //выполнить фильтрацию значений поля Данные в соответствии
+    // с выбранным значением Тип данных
+    //(предварительно почистив крайние пустые и пробельные символы)
     tryFilterByType(typeInput.value.trim(), dataInput.value.trim());
   }
 });
